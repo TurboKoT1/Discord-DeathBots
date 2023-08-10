@@ -51,9 +51,6 @@ class Bots:
                         'x-super-properties': b64encode(dumps(self.x_super_properties).replace(" ", "").encode("UTF-8")).decode("UTF-8")}
                 )
 
-                print(request.status_code)
-                print(request.text)
-
                 if request.status_code == 200:
                     self.tokens.append(token)
                 else:
@@ -126,8 +123,6 @@ class Bots:
                 }
             )
 
-            print(request.text)
-
             if request.status_code == 200:
                 created_threads += 1
 
@@ -151,8 +146,6 @@ class Bots:
                     'discriminator': discriminator
                 }
             )
-
-            print(request.text)
 
             if request.status_code == 200:
                 added += 1
