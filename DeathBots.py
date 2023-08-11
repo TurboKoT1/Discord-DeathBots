@@ -51,6 +51,9 @@ class Bots:
                         'x-super-properties': b64encode(dumps(self.x_super_properties).replace(" ", "").encode("UTF-8")).decode("UTF-8")}
                 )
 
+                print(request.status_code)
+                print(request.text)
+
                 if request.status_code == 200:
                     self.tokens.append(token)
                 else:
@@ -123,6 +126,8 @@ class Bots:
                 }
             )
 
+            print(request.text)
+
             if request.status_code == 200:
                 created_threads += 1
 
@@ -147,7 +152,55 @@ class Bots:
                 }
             )
 
+            print(request.text)
+
             if request.status_code == 200:
                 added += 1
 
         return added
+
+    def change_server_nickname(self, gid, nickname):
+        changed = 0
+        url = f"https://discord.com/api/v9/guilds/{gid}/members/@me"
+
+        for token in self.tokens:
+            request = requests.patch(
+                url,
+                headers={
+                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
+                    'Authorization': token,
+                    'x-super-properties': b64encode(
+                        dumps(self.x_super_properties).replace(" ", "").encode("UTF-8")).decode("UTF-8")
+                },
+                json={
+                    'nick': nickname
+                }
+            )
+
+            if request.status_code == 200:
+                changed += 1
+
+        return changed
+
+    def change_bio(self, bio):
+        changed = 0
+        url = f"https://discord.com/api/v9/users/@me/profile"
+
+        for token in self.tokens:
+            request = requests.patch(
+                url,
+                headers={
+                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200',
+                    'Authorization': token,
+                    'x-super-properties': b64encode(
+                        dumps(self.x_super_properties).replace(" ", "").encode("UTF-8")).decode("UTF-8")
+                },
+                json={
+                    'bio': bio
+                }
+            )
+
+            if request.status_code == 200:
+                changed += 1
+
+        return changed
