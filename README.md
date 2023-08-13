@@ -8,7 +8,7 @@ Simple library for creating raid bots in Discord
   	4.Call the get_and_check_tokens function to get and check the tokens (bots.get_and_check_tokens())
 
 # Change-Log:
-  V1.0;
-     Released
-  V1.1;
+  	V1.0;
+  	 Released
+  	V1.1;
      Added new functions: change_bio, change_server_nickname
