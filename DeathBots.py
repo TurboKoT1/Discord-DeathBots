@@ -115,13 +115,7 @@ class Bots:
         sent_msgs = 0
 
         for token in self.tokens:
-            request = self.send_request(
-                'POST',
-                f"channels/{cid}/messages",
-                token,
-                {'content': message}
-            )
-
+            request = self.send_request('POST', f"channels/{cid}/messages", token, {'content': message})
             if request.status_code == 200:
                 sent_msgs += 1
 
@@ -141,12 +135,9 @@ class Bots:
         joined = 0
 
         for token in self.tokens:
-            request = self.send_request(
-                'POST',
-                f'invites/{invite_code}?inputValue=https://discord.gg/{invite_code}&with_counts=true&with_expiration'
-                f'=true',
-                token
-            )
+            request = self.send_request('POST',
+                                        f'invites/{invite_code}?inputValue=https://discord.gg/{invite_code}'
+                                        f'&with_counts=true&with_expiration=true', token)
 
             if request.status_code == 200 and "captcha_key" not in request.text:
                 joined += 1
@@ -169,17 +160,8 @@ class Bots:
         created_threads = 0
 
         for token in self.tokens:
-            request = self.send_request(
-                'POST',
-                f'channels/{cid}/messages/{mid}/threads',
-                token,
-                {
-                    'name': name,
-                    'type': 11,
-                    'auto_archive_duration': 4320,
-                    'location': "Message"
-                }
-            )
+            request = self.send_request('POST', f'channels/{cid}/messages/{mid}/threads', token,
+                                        {'name': name, 'type': 11, 'auto_archive_duration': 4320, 'location': "Message"})
 
             if request.status_code == 200:
                 created_threads += 1
@@ -201,15 +183,8 @@ class Bots:
         added = 0
 
         for token in self.tokens:
-            request = self.send_request(
-                'POST',
-                'users/@me/relationships',
-                token,
-                {
-                    'username': name,
-                    'discriminator': discriminator
-                }
-            )
+            request = self.send_request('POST', 'users/@me/relationships', token, {'username': name,
+                                                                                   'discriminator': discriminator})
 
             if request.status_code == 200:
                 added += 1
@@ -231,15 +206,7 @@ class Bots:
         changed = 0
 
         for token in self.tokens:
-            request = self.send_request(
-                'PATCH',
-                f'guilds/{gid}/members/@me',
-                token,
-                {
-                    'nick': nickname
-                }
-            )
-
+            request = self.send_request('PATCH', f'guilds/{gid}/members/@me', token, {'nick': nickname})
             if request.status_code == 200:
                 changed += 1
 
@@ -259,13 +226,7 @@ class Bots:
         changed = 0
 
         for token in self.tokens:
-            request = self.send_request(
-                'PATCH',
-                'users/@me/profile',
-                token,
-                {'bio': bio}
-            )
-
+            request = self.send_request('PATCH', 'users/@me/profile', token, {'bio': bio})
             if request.status_code == 200:
                 changed += 1
 
@@ -283,12 +244,7 @@ class Bots:
     #     authorized = 0
     #
     #     for token in self.tokens:
-    #         request = self.send_request(
-    #             'GET',
-    #             'users/@me/library',
-    #             token
-    #         )
-    #
+    #         request = self.send_request('GET', 'users/@me/library', token)
     #         if request.status_code == 200:
     #             authorized += 1
     #
