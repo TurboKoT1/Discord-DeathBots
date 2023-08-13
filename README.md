@@ -12,3 +12,5 @@ Simple library for creating raid bots in Discord
   	 Released
   	V1.1;
      Added new functions: change_bio, change_server_nickname
+    V1.2;
+     Optimized library code. (Added comments to the all functions in the code, deleted shitcode)
